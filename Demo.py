@@ -36,7 +36,7 @@ def train_model(stock):
 
     X_train = []
     y_train = []
-    for i in range(10, 251):
+    for i in range(10, 4568):
 
         X_train.append(training_set_scaled[i-10:i, 0])
         y_train.append(training_set_scaled[i, 0])
@@ -187,23 +187,6 @@ def valid_login():
             msg1 = "Wrong username or password "
             return render_template('login.html', info=msg1)
 
-        # for i in r:
-        #     if (username == i[0] and pwd == i[1]):
-        #         session["logedin"] = True
-        #         return redirect(url_for('/home'))
-        #     else:
-        #         msg1 = "wrong username or password"
-        #         return render_template('login.html', info=msg1)
-
-        # if username not in database:
-        #     return render_template('login.html', info='invalid')
-        # else:
-        #     if database[username] != pwd:
-        #         return render_template('login.html', info='invalid')
-        #     else:
-        #         # return render_template('login.html', info='You Have Successfully Logged In')
-        #         return render_template('home.html')
-
     return render_template('login.html')
 
 
@@ -226,7 +209,6 @@ def home_fun():
             predVal, open_Xtest = predictOpen(openPrice)
             return render_template('home.html', predVal=predVal, openPrice=openPrice)
         return render_template('home.html', predVal=None)
-
     return redirect(url_for('login'))
 
 
@@ -241,12 +223,7 @@ def before_request():
 @app.before_first_request  # runs before FIRST request (only once)
 def make_session_permanent():
     session.permanent = True
-    app.permanent_session_lifetime = timedelta(minutes=1)
-
-# @app.before_request
-# def make_session_permanent():
-#     session.permanent = True
-#     app.permanent_session_lifetime = timedelta(minutes=5)
+    app.permanent_session_lifetime = timedelta(minutes=5)
 
 
 @app.route('/login')
@@ -263,6 +240,21 @@ def logout():
 
 if __name__ == '__main__':
 
-    # app.config['SESSION_TYPE'] = 'filesystem'
-    # app.secret_key = 'key'
     app.run(port=504, debug=True)
+
+
+# 97.56,97.85,98.41,99.09,99.21,97.80,95.33,95.10,96.12,93.53 amazon
+
+# 95.45,94.74,94.43,94.49,95.37,94.85,93.00,91.70,91.92,89.44 Google
+
+# 359.16,349.50,357.55,356.63,355.00,347.90,342.85,337.50,331.23,319.30 Netflix
+
+# 778.81,788.36,786.08,795.26,806.4,807.86,805,807.14,807.48,807.08
+
+# 806.4,807.86,805,807.14,807.48,807.08,805.81,805.12,806.91,807.25
+
+# 329.8,322.0,328.3,313.,310.5,314.4,311.9,314.8,312.1,319.3
+
+# 294.16,291.91,292.07,287.68,284.92,284.32,287.95,290.41,291.38,291.34
+
+# 302.44,303.18,304.87,304.87,302.81,304.11,304.63,305.32,300.28,301.36
